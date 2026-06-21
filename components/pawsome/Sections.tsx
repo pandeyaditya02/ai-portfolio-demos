@@ -238,13 +238,13 @@ export function PwServices() {
 
 export function PwGallery() {
   return (
-    <section id="gallery" className="pw-gallery relative h-[100svh] overflow-hidden">
-      <div className="absolute left-6 top-24 z-10 sm:left-10">
+    <section id="gallery" className="pw-gallery relative flex h-[100svh] flex-col overflow-hidden">
+      <div className="px-6 pb-4 pt-24 sm:px-10">
         <p className="text-xs uppercase tracking-[0.25em] text-[var(--pw-amber)]">The gallery</p>
         <h2 className="pw-display pw-h-xl mt-2 text-[var(--pw-cream)]">Glow ups</h2>
       </div>
-      <div className="flex h-full items-center">
-        <div className="pw-h-track h-[62vh]">
+      <div className="flex flex-1 items-center pb-10">
+        <div className="pw-h-track h-[56vh]">
           {gallery.map((item, i) => (
             <figure
               key={item.title}

@@ -12,6 +12,7 @@ const GOOGLE_FONTS = [
   "Archivo:wght@400;500;600;700;800",
   "Nunito:wght@400;500;600;700;800",
   "Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,700;12..96,800",
+  "Instrument+Serif:ital@0;1",
   "Playfair+Display:wght@400;500;600;700;800",
   "Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700",
   "DM+Serif+Display",

@@ -347,10 +347,315 @@ body {
   color: var(--pw-cream);
 }
 
+/* ============================================================
+   BRIGHT SMILE DENTAL — clinical-luxury light experience (scoped)
+   ============================================================ */
+.bsd {
+  --bsd-bg: #eef3fb;
+  --bsd-surface: #ffffff;
+  --bsd-ink: #0a1830;
+  --bsd-muted: #5b6b86;
+  --bsd-blue: #2f6bff;
+  --bsd-blue-deep: #1b3aa0;
+  --bsd-mint: #15c5c5;
+  --bsd-amber: #ffb020;
+  --bsd-display: "Sora", ui-sans-serif, system-ui, sans-serif;
+  --bsd-serif: "Instrument Serif", Georgia, serif;
+  --bsd-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+
+  position: relative;
+  background: var(--bsd-bg);
+  color: var(--bsd-ink);
+  font-family: var(--bsd-sans);
+  overflow-x: hidden;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .bsd,
+  .bsd a,
+  .bsd button {
+    cursor: none;
+  }
+}
+
+/* Custom cursor (white + difference blend so it stays visible on light
+   sections and the dark journey alike) */
+.bsd-cursor,
+.bsd-cursor-dot {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 9999;
+  pointer-events: none;
+  border-radius: 9999px;
+  will-change: transform;
+  mix-blend-mode: difference;
+}
+.bsd-cursor {
+  width: 36px;
+  height: 36px;
+  margin: -18px 0 0 -18px;
+  border: 1.5px solid #fff;
+  transition: width 0.28s ease, height 0.28s ease, margin 0.28s ease,
+    background 0.28s ease, border-color 0.28s ease;
+}
+.bsd-cursor[data-variant="hover"] {
+  width: 76px;
+  height: 76px;
+  margin: -38px 0 0 -38px;
+  background: #fff;
+}
+.bsd-cursor[data-variant="drag"] {
+  width: 108px;
+  height: 108px;
+  margin: -54px 0 0 -54px;
+  background: #fff;
+}
+.bsd-cursor-label {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #0a1830;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+.bsd-cursor[data-variant="hover"] .bsd-cursor-label,
+.bsd-cursor[data-variant="drag"] .bsd-cursor-label {
+  opacity: 1;
+}
+.bsd-cursor-dot {
+  width: 5px;
+  height: 5px;
+  margin: -2.5px 0 0 -2.5px;
+  background: #fff;
+}
+@media (hover: none) {
+  .bsd-cursor,
+  .bsd-cursor-dot {
+    display: none;
+  }
+}
+
+/* Soft mesh-gradient blobs */
+.bsd-blob {
+  position: absolute;
+  border-radius: 9999px;
+  filter: blur(90px);
+  opacity: 0.55;
+  pointer-events: none;
+  will-change: transform;
+}
+
+/* Glass (light) */
+.bsd-glass {
+  background: rgba(255, 255, 255, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.8);
+  box-shadow: 0 24px 60px -28px rgba(10, 24, 48, 0.28);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+}
+
+/* Buttons */
+.bsd-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  border-radius: 9999px;
+  background: var(--bsd-ink);
+  color: #fff;
+  padding: 0.95rem 1.7rem;
+  font-size: 0.92rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  will-change: transform;
+  transition: background 0.3s ease, color 0.3s ease;
+}
+.bsd-btn:hover { background: var(--bsd-blue); }
+.bsd-btn--ghost {
+  background: transparent;
+  color: var(--bsd-ink);
+  border: 1px solid rgba(10, 24, 48, 0.2);
+}
+.bsd-btn--ghost:hover { background: rgba(10, 24, 48, 0.05); color: var(--bsd-ink); }
+
+/* Inputs */
+.bsd-input {
+  width: 100%;
+  border-radius: 14px;
+  border: 1px solid rgba(10, 24, 48, 0.14);
+  background: rgba(255, 255, 255, 0.9);
+  padding: 0.72rem 0.95rem;
+  font-size: 0.9rem;
+  color: var(--bsd-ink);
+  outline: none;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+.bsd-input::placeholder { color: rgba(91, 107, 134, 0.7); }
+.bsd-input:focus {
+  border-color: var(--bsd-blue);
+  box-shadow: 0 0 0 4px rgba(47, 107, 255, 0.16);
+}
+
+/* Typography */
+.bsd-display {
+  font-family: var(--bsd-display);
+  font-weight: 700;
+  line-height: 0.94;
+  letter-spacing: -0.035em;
+}
+.bsd-serif { font-family: var(--bsd-serif); font-weight: 400; }
+.bsd-h-mega { font-size: clamp(3rem, 12vw, 11rem); }
+.bsd-h-xl { font-size: clamp(2.2rem, 6.5vw, 5.5rem); }
+
+/* Reveal + masked-line primitives */
+.bsd-reveal { opacity: 0; transform: translateY(42px); }
+.is-ready .bsd-reveal { opacity: 1; transform: none; }
+.bsd-line-mask { overflow: hidden; display: block; }
+.bsd-line { display: block; transform: translateY(115%); }
+.is-ready .bsd-line { transform: none; }
+
+/* SVG smile line-draw */
+.bsd-arc {
+  fill: none;
+  stroke: var(--bsd-blue);
+  stroke-width: 4;
+  stroke-linecap: round;
+}
+
+/* Marquee (reuses pw-marquee keyframes) */
+.bsd-marquee {
+  display: flex;
+  width: max-content;
+  will-change: transform;
+  animation: pw-marquee 32s linear infinite;
+}
+
+/* Journey (pinned horizontal chapters) */
+.bsd-journey-track {
+  display: flex;
+  height: 100%;
+  will-change: transform;
+}
+.bsd-progress {
+  transform-origin: left center;
+  transform: scaleX(0);
+}
+
+/* Before / after smile slider */
+.bsd-ba {
+  position: relative;
+  overflow: hidden;
+  border-radius: 28px;
+  user-select: none;
+  touch-action: none;
+}
+.bsd-ba__layer {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+}
+.bsd-ba__before { filter: grayscale(0.85) brightness(0.82) contrast(0.95); }
+.bsd-ba__after {
+  filter: saturate(1.12) brightness(1.05);
+  clip-path: inset(0 0 0 50%);
+}
+.bsd-ba__handle {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  width: 2px;
+  background: #fff;
+  box-shadow: 0 0 0 1px rgba(10, 24, 48, 0.15);
+  transform: translateX(-1px);
+}
+.bsd-ba__grip {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 54px;
+  height: 54px;
+  transform: translate(-50%, -50%);
+  border-radius: 9999px;
+  background: #fff;
+  box-shadow: 0 10px 30px -8px rgba(10, 24, 48, 0.45);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  color: var(--bsd-ink);
+}
+.bsd-ba__tag {
+  position: absolute;
+  bottom: 16px;
+  padding: 6px 12px;
+  border-radius: 9999px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  backdrop-filter: blur(6px);
+}
+
+/* FAQ accordion */
+.bsd-faq__a {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.bsd-faq[data-open="true"] .bsd-faq__a { grid-template-rows: 1fr; }
+.bsd-faq__inner { overflow: hidden; }
+.bsd-faq__icon { transition: transform 0.4s ease; }
+.bsd-faq[data-open="true"] .bsd-faq__icon { transform: rotate(45deg); }
+
+/* Preloader */
+.bsd-preloader {
+  position: fixed;
+  inset: 0;
+  z-index: 10000;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1.6rem;
+  background: var(--bsd-bg);
+  color: var(--bsd-ink);
+}
+.bsd-preloader__bar {
+  width: min(240px, 60vw);
+  height: 2px;
+  background: rgba(10, 24, 48, 0.12);
+  overflow: hidden;
+  border-radius: 9999px;
+}
+.bsd-preloader__fill {
+  display: block;
+  height: 100%;
+  width: 0%;
+  background: var(--bsd-blue);
+}
+
+/* Page transition wipe */
+.bsd-wipe {
+  position: fixed;
+  inset: 0;
+  z-index: 9998;
+  background: var(--bsd-ink);
+  transform: scaleY(0);
+  transform-origin: bottom;
+  pointer-events: none;
+}
+
 @media (prefers-reduced-motion: reduce) {
-  .pw-marquee,
-  .pw-grain { animation: none; }
-  .pw-reveal { opacity: 1; transform: none; }
-  .pw-line { transform: none; }
+  .bsd-marquee { animation: none; }
+  .bsd-reveal { opacity: 1; transform: none; }
+  .bsd-line { transform: none; }
 }
 

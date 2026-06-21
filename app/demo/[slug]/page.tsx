@@ -5,6 +5,7 @@ import { themeToStyle } from "@/lib/theme";
 import { DemoHero } from "@/components/demo/DemoHero";
 import { AutomationShowcase } from "@/components/demo/AutomationShowcase";
 import { PawsomeExperience } from "@/components/pawsome/PawsomeExperience";
+import { BrightSmileExperience } from "@/components/brightsmile/BrightSmileExperience";
 import {
   AutomationList,
   DemoBanner,
@@ -36,6 +37,11 @@ export default function DemoPage({ params }: { params: { slug: string } }) {
   // Pawsome Grooming ships a bespoke, Awwwards-grade experience.
   if (business.slug === "pet-care") {
     return <PawsomeExperience />;
+  }
+
+  // Bright Smile Dental ships its own bespoke, light-themed experience.
+  if (business.slug === "dentist") {
+    return <BrightSmileExperience />;
   }
 
   return (
