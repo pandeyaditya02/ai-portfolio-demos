@@ -6,6 +6,7 @@ import { DemoHero } from "@/components/demo/DemoHero";
 import { AutomationShowcase } from "@/components/demo/AutomationShowcase";
 import { PawsomeExperience } from "@/components/pawsome/PawsomeExperience";
 import { BrightSmileExperience } from "@/components/brightsmile/BrightSmileExperience";
+import { EmberExperience } from "@/components/ember/EmberExperience";
 import {
   AutomationList,
   DemoBanner,
@@ -42,6 +43,11 @@ export default function DemoPage({ params }: { params: { slug: string } }) {
   // Bright Smile Dental ships its own bespoke, light-themed experience.
   if (business.slug === "dentist") {
     return <BrightSmileExperience />;
+  }
+
+  // Olive & Ember ships the "Tend the Fire" experience.
+  if (business.slug === "restaurant") {
+    return <EmberExperience />;
   }
 
   return (
