@@ -4,27 +4,23 @@ import { useEffect, useRef } from "react";
 import { useRouter } from "next/navigation";
 import { loadMotionLibs, prefersReducedMotion } from "@/components/pawsome/motion";
 import {
-  BsdAutomation,
-  BsdAutomationIdeas,
-  BsdCta,
-  BsdFaq,
-  BsdHero,
-  BsdJourney,
-  BsdMarquee,
-  BsdNav,
-  BsdServices,
-  BsdStats,
-  BsdStory,
-  BsdTestimonial,
-  BsdTransformation,
+  FbBakes,
+  FbCraft,
+  FbCrumbs,
+  FbFresh,
+  FbHero,
+  FbLayers,
+  FbMarquee,
+  FbNav,
+  FbOrder,
+  FbStats,
 } from "./Sections";
 
-export function BrightSmileExperience() {
+export function FlourBloomExperience() {
   const router = useRouter();
   const rootRef = useRef<HTMLDivElement>(null);
   const cursorRef = useRef<HTMLDivElement>(null);
   const dotRef = useRef<HTMLDivElement>(null);
-  const labelRef = useRef<HTMLSpanElement>(null);
   const wipeRef = useRef<HTMLDivElement>(null);
   const fillRef = useRef<HTMLSpanElement>(null);
   const preloaderRef = useRef<HTMLDivElement>(null);
@@ -40,7 +36,7 @@ export function BrightSmileExperience() {
     let cancelled = false;
     let lenis: any = null;
 
-    /* Custom cursor (lerp follow) */
+    /* Custom cursor (lerp-follow ring + dot) */
     const fine = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
     if (fine && cursorRef.current && dotRef.current) {
       const ring = cursorRef.current;
@@ -53,26 +49,17 @@ export function BrightSmileExperience() {
         dot.style.transform = `translate(${e.clientX}px, ${e.clientY}px)`;
       };
       const tick = () => {
-        pos.x += (target.x - pos.x) * 0.18;
-        pos.y += (target.y - pos.y) * 0.18;
+        pos.x += (target.x - pos.x) * 0.16;
+        pos.y += (target.y - pos.y) * 0.16;
         ring.style.transform = `translate(${pos.x}px, ${pos.y}px)`;
         rafId = requestAnimationFrame(tick);
       };
       window.addEventListener("mousemove", onMove);
       rafId = requestAnimationFrame(tick);
 
-      const setVariant = (v: string, label = "") => {
-        ring.dataset.variant = v;
-        if (labelRef.current) labelRef.current.textContent = label;
-      };
-      const textSel =
-        "h1, h2, h3, h4, h5, h6, p, span, li, blockquote, figcaption, em, b, strong, .bsd-display, .bsd-counter";
       const onOver = (e: MouseEvent) => {
         const t = e.target as HTMLElement;
-        if (t.closest(".bsd-ba")) setVariant("drag", "Drag");
-        else if (t.closest("a, button, [data-magnetic]")) setVariant("hover", "");
-        else if (t.closest(textSel)) setVariant("hover", "");
-        else setVariant("", "");
+        ring.dataset.variant = t.closest("a, button, [data-magnetic]") ? "hover" : "";
       };
       document.addEventListener("mouseover", onOver);
       cleanups.push(() => {
@@ -81,11 +68,11 @@ export function BrightSmileExperience() {
       });
     }
 
-    /* Preloader fill bar */
+    /* Preloader "preheat" fill */
     if (fillRef.current && !reduced) {
       let n = 0;
       fillTimer = window.setInterval(() => {
-        n = Math.min(100, n + Math.ceil(Math.random() * 8));
+        n = Math.min(100, n + Math.ceil(Math.random() * 9));
         if (fillRef.current) fillRef.current.style.width = `${n}%`;
         if (n >= 100) window.clearInterval(fillTimer);
       }, 80);
@@ -102,8 +89,8 @@ export function BrightSmileExperience() {
       root.querySelectorAll<HTMLElement>("[data-magnetic]").forEach((el) => {
         const move = (e: MouseEvent) => {
           const r = el.getBoundingClientRect();
-          const x = (e.clientX - (r.left + r.width / 2)) * 0.4;
-          const y = (e.clientY - (r.top + r.height / 2)) * 0.4;
+          const x = (e.clientX - (r.left + r.width / 2)) * 0.38;
+          const y = (e.clientY - (r.top + r.height / 2)) * 0.38;
           if (gsap) gsap.to(el, { x, y, duration: 0.4, ease: "power3.out" });
           else el.style.transform = `translate(${x}px, ${y}px)`;
         };
@@ -143,51 +130,41 @@ export function BrightSmileExperience() {
       }
 
       const ctx = gsap.context(() => {
-        /* Hero intro + smile line-draw */
-        const tl = gsap.timeline({ defaults: { ease: "power4.out" } });
-        tl.from("[data-bsd-hero] .bsd-line", { yPercent: 115, duration: 1.1, stagger: 0.12 });
-        tl.from(".bsd-hero-sub", { y: 30, opacity: 0, duration: 0.9, stagger: 0.1 }, "-=0.7");
-        const arc = root.querySelector(".bsd-arc") as SVGPathElement | null;
-        if (arc) {
-          const len = arc.getTotalLength();
-          gsap.set(arc, { strokeDasharray: len, strokeDashoffset: len });
-          tl.to(arc, { strokeDashoffset: 0, duration: 1.2, ease: "power2.inOut" }, "-=0.8");
-        }
+        /* Hero intro: kinetic letters + subs */
+        const tl = gsap.timeline({ defaults: { ease: "power3.out" } });
+        tl.from("[data-fb-hero] .fb-letter", {
+          opacity: 0,
+          yPercent: 80,
+          duration: 0.8,
+          stagger: { each: 0.04, from: "start" },
+        });
+        tl.from(".fb-hero-sub", { opacity: 0, y: 24, duration: 0.8, stagger: 0.12 }, "-=0.4");
 
         /* Masked line groups */
-        gsap.utils.toArray<HTMLElement>("[data-bsd-lines]").forEach((group) => {
-          gsap.from(group.querySelectorAll(".bsd-line"), {
+        gsap.utils.toArray<HTMLElement>("[data-fb-lines]").forEach((group) => {
+          gsap.from(group.querySelectorAll(".fb-line"), {
             yPercent: 115,
             duration: 1,
             ease: "power4.out",
             stagger: 0.12,
-            scrollTrigger: { trigger: group, start: "top 80%" },
+            scrollTrigger: { trigger: group, start: "top 82%" },
           });
         });
 
         /* Generic reveals */
-        gsap.utils.toArray<HTMLElement>("[data-bsd-reveal]").forEach((el) => {
+        gsap.utils.toArray<HTMLElement>("[data-fb-reveal]").forEach((el) => {
           gsap.from(el, {
-            y: 50,
             opacity: 0,
+            y: 50,
+            scale: 0.98,
             duration: 1,
             ease: "power3.out",
-            scrollTrigger: { trigger: el, start: "top 86%" },
+            scrollTrigger: { trigger: el, start: "top 88%" },
           });
         });
 
-        /* Parallax blobs */
-        gsap.utils.toArray<HTMLElement>("[data-bsd-parallax]").forEach((el) => {
-          const speed = parseFloat(el.dataset.speed || "0.3");
-          gsap.to(el, {
-            yPercent: speed * 60,
-            ease: "none",
-            scrollTrigger: { trigger: el, start: "top bottom", end: "bottom top", scrub: true },
-          });
-        });
-
-        /* Counters (supports prefix) */
-        gsap.utils.toArray<HTMLElement>(".bsd-counter").forEach((el) => {
+        /* Counters */
+        gsap.utils.toArray<HTMLElement>(".fb-counter").forEach((el) => {
           const value = parseFloat(el.dataset.value || "0");
           const decimals = parseInt(el.dataset.decimals || "0", 10);
           const prefix = el.dataset.prefix || "";
@@ -205,25 +182,44 @@ export function BrightSmileExperience() {
           });
         });
 
-        /* Pinned horizontal journey + progress bar */
-        const track = root.querySelector<HTMLElement>(".bsd-journey-track");
-        const journeyEl = root.querySelector<HTMLElement>(".bsd-journey");
-        const progress = root.querySelector<HTMLElement>(".bsd-progress");
-        if (track && journeyEl) {
+        /* SVG path draw (wheat stalk + layer connector) */
+        gsap.utils.toArray<SVGPathElement>(".fb-draw").forEach((path) => {
+          const len = path.getTotalLength();
+          gsap.set(path, { strokeDasharray: len, strokeDashoffset: len });
+          gsap.to(path, {
+            strokeDashoffset: 0,
+            duration: 1.6,
+            ease: "power2.inOut",
+            scrollTrigger: { trigger: path, start: "top 85%" },
+          });
+        });
+
+        /* Wheat grains sway */
+        gsap.to(".fb-leaf", {
+          rotation: "+=5",
+          transformOrigin: "center",
+          duration: 2.6,
+          ease: "sine.inOut",
+          yoyo: true,
+          repeat: -1,
+          stagger: { each: 0.16, from: "center" },
+        });
+
+        /* Pinned bakes "pass" */
+        const track = root.querySelector<HTMLElement>(".fb-pass-track");
+        const passEl = root.querySelector<HTMLElement>(".fb-pass");
+        if (track && passEl) {
           const getScroll = () => track.scrollWidth - window.innerWidth + window.innerWidth * 0.06;
           gsap.to(track, {
             x: () => -getScroll(),
             ease: "none",
             scrollTrigger: {
-              trigger: journeyEl,
+              trigger: passEl,
               start: "top top",
               end: () => `+=${getScroll()}`,
               pin: true,
               scrub: 1,
               invalidateOnRefresh: true,
-              onUpdate: (self: any) => {
-                if (progress) gsap.set(progress, { scaleX: self.progress });
-              },
             },
           });
         }
@@ -257,38 +253,35 @@ export function BrightSmileExperience() {
   };
 
   return (
-    <div ref={rootRef} className="bsd">
-      {/* Preloader */}
-      <div ref={preloaderRef} className="bsd-preloader">
-        <span className="bsd-serif text-3xl italic text-[var(--bsd-ink)]">Breathe.</span>
-        <div className="bsd-preloader__bar">
-          <span ref={fillRef} className="bsd-preloader__fill" />
-        </div>
-        <span className="text-[11px] uppercase tracking-[0.3em] text-[var(--bsd-muted)]">Bright Smile Dental</span>
-      </div>
-
+    <div ref={rootRef} className="flourbloom">
       {/* Custom cursor */}
-      <div ref={cursorRef} className="bsd-cursor" data-variant="">
-        <span ref={labelRef} className="bsd-cursor-label" />
+      <div ref={cursorRef} className="fb-cursor" data-variant="" aria-hidden />
+      <div ref={dotRef} className="fb-cursor-dot" aria-hidden />
+
+      {/* Grain + page wipe */}
+      <div className="fb-grain" aria-hidden />
+      <div ref={wipeRef} className="fb-wipe" aria-hidden />
+
+      {/* Preloader */}
+      <div ref={preloaderRef} className="fb-preloader">
+        <span className="fb-serif text-4xl italic text-[var(--fb-cream)]">Preheating the oven.</span>
+        <div className="fb-preloader__bar">
+          <span ref={fillRef} className="fb-preloader__fill" />
+        </div>
+        <span className="text-[11px] uppercase tracking-[0.3em] text-[var(--fb-cream)]/50">Flour &amp; Bloom</span>
       </div>
-      <div ref={dotRef} className="bsd-cursor-dot" />
 
-      <div ref={wipeRef} className="bsd-wipe" />
-
-      <BsdNav onBack={() => navigateWithWipe("/")} />
+      <FbNav onBack={() => navigateWithWipe("/")} />
       <main>
-        <BsdHero />
-        <BsdMarquee />
-        <BsdStory />
-        <BsdServices />
-        <BsdTransformation />
-        <BsdJourney />
-        <BsdStats />
-        <BsdAutomationIdeas />
-        <BsdAutomation />
-        <BsdFaq />
-        <BsdTestimonial />
-        <BsdCta onBack={() => navigateWithWipe("/")} />
+        <FbHero />
+        <FbMarquee />
+        <FbCraft />
+        <FbBakes />
+        <FbLayers />
+        <FbFresh />
+        <FbStats />
+        <FbOrder />
+        <FbCrumbs onBack={() => navigateWithWipe("/")} />
       </main>
     </div>
   );

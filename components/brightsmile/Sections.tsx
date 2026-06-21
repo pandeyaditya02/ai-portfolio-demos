@@ -402,3 +402,50 @@ export function BsdCta({ onBack }: { onBack: () => void }) {
     </section>
   );
 }
+
+const bsdAutomationIdeas = [
+  {
+    icon: "\u{1F6E1}\uFE0F",
+    title: "Insurance eligibility checker",
+    desc: "Verifies coverage and benefits automatically before the visit, so there are no billing surprises.",
+  },
+  {
+    icon: "\u{1F4CB}",
+    title: "Treatment-plan follow-up",
+    desc: "Sequences gentle reminders for unaccepted treatment plans until the patient books the work.",
+  },
+  {
+    icon: "\u23F3",
+    title: "Cancellation waitlist auto-fill",
+    desc: "Instantly offers a freed-up slot to waitlisted patients and rebooks it without a single phone call.",
+  },
+];
+
+export function BsdAutomationIdeas() {
+  return (
+    <section className="px-6 py-24 sm:px-10">
+      <div className="mx-auto max-w-[1600px]">
+        <div className="mx-auto max-w-2xl text-center" data-bsd-reveal>
+          <p className="text-xs uppercase tracking-[0.25em] text-[var(--bsd-blue)]">More AI we can add</p>
+          <h2 className="bsd-display bsd-h-xl mt-4 text-[var(--bsd-ink)]">
+            Smarter front desk,<br />
+            <span className="bsd-serif italic text-[var(--bsd-blue)]">on autopilot.</span>
+          </h2>
+        </div>
+        <div className="mt-14 grid gap-5 md:grid-cols-3">
+          {bsdAutomationIdeas.map((a) => (
+            <div
+              key={a.title}
+              data-bsd-reveal
+              className="rounded-[28px] border border-black/10 bg-white p-7 shadow-sm transition-shadow hover:shadow-xl"
+            >
+              <div className="text-3xl">{a.icon}</div>
+              <h3 className="bsd-display mt-5 text-2xl text-[var(--bsd-ink)]">{a.title}</h3>
+              <p className="mt-3 text-sm leading-relaxed text-[var(--bsd-muted)]">{a.desc}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}

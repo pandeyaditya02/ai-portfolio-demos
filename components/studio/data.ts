@@ -41,6 +41,55 @@ export const services = [
   },
 ];
 
+/** Cross-cutting AI automations offered to every kind of business. */
+export const automationCapabilities = [
+  {
+    icon: "\u{1F4AC}",
+    title: "24/7 AI receptionist & chatbot",
+    desc: "Answers FAQs, books appointments, and captures leads around the clock.",
+  },
+  {
+    icon: "\u{1F3AF}",
+    title: "Lead scoring & prioritization",
+    desc: "Ranks every inquiry by conversion likelihood so you chase the hottest first.",
+  },
+  {
+    icon: "\u{1F4C5}",
+    title: "No-show & cancellation prediction",
+    desc: "Flags risky bookings and auto-triggers deposits or confirmation nudges.",
+  },
+  {
+    icon: "\u2B50",
+    title: "Reviews & reputation monitoring",
+    desc: "Requests reviews, drafts responses, and flags negative sentiment early.",
+  },
+  {
+    icon: "\u{1F514}",
+    title: "Smart reminders & follow-ups",
+    desc: "Multi-channel SMS, WhatsApp, and email reminders that run themselves.",
+  },
+  {
+    icon: "\u{1F9FE}",
+    title: "Auto invoicing & receipts",
+    desc: "Itemized, branded, instant receipts with zero manual bookkeeping.",
+  },
+  {
+    icon: "\u{1F501}",
+    title: "Win-back & reactivation",
+    desc: "Automatically re-engages lapsed customers with timely offers.",
+  },
+  {
+    icon: "\u{1F4C8}",
+    title: "Demand & capacity forecasting",
+    desc: "Optimizes scheduling and inventory from your booking patterns.",
+  },
+  {
+    icon: "\u{1F381}",
+    title: "Personalized upsell & cross-sell",
+    desc: "Recommends the right next service from each customer's history.",
+  },
+];
+
 export const process = [
   { n: "01", title: "Discovery", body: "We map your services, customers, and the busywork eating your day." },
   { n: "02", title: "Design & build", body: "A premium, custom website crafted around your brand." },
@@ -60,7 +109,7 @@ export const marqueeWords = [
 ];
 
 /** Demo slugs that get bespoke, Awwwards-grade builds (flagged as featured). */
-export const featuredSlugs = ["pet-care", "dentist", "restaurant"];
+export const featuredSlugs = ["pet-care", "dentist", "restaurant", "bakery"];
 
 export const microcopy = {
   loader: "Warming up the studio",

@@ -297,6 +297,54 @@ export function PwStats() {
   );
 }
 
+const pwAutomationIdeas = [
+  {
+    icon: "\u{1F415}",
+    title: "Breed-aware grooming recommender",
+    desc: "Suggests the right service and price from breed, coat, and a quick photo at booking time.",
+  },
+  {
+    icon: "\u{1F4F7}",
+    title: "Coat & skin pre-screening",
+    desc: "AI reviews uploaded photos to flag mats, hot spots, or skin issues before the appointment.",
+  },
+  {
+    icon: "\u{1F501}",
+    title: "Smart rebooking cadence",
+    desc: "Predicts each pet's ideal next-groom date and sends a one-tap rebook invite at just the right time.",
+  },
+];
+
+export function PwAutomationIdeas() {
+  return (
+    <section className="px-6 py-24 sm:px-10">
+      <div className="mx-auto max-w-[1600px]">
+        <div className="mx-auto max-w-2xl text-center" data-reveal>
+          <p className="text-xs uppercase tracking-[0.25em] text-[var(--pw-amber)]">More AI on the way</p>
+          <h2 className="pw-display pw-h-xl mt-4 text-[var(--pw-cream)]">
+            Automations we can
+            <br />
+            <span className="pw-serif italic text-[var(--pw-teal)]">wire in next.</span>
+          </h2>
+        </div>
+        <div className="mt-14 grid gap-5 md:grid-cols-3">
+          {pwAutomationIdeas.map((a) => (
+            <div
+              key={a.title}
+              data-reveal
+              className="rounded-[28px] border border-white/10 bg-white/[0.03] p-7 transition-colors hover:bg-white/[0.06]"
+            >
+              <div className="text-3xl">{a.icon}</div>
+              <h3 className="pw-display mt-5 text-2xl text-[var(--pw-cream)]">{a.title}</h3>
+              <p className="mt-3 text-sm leading-relaxed text-[var(--pw-cream)]/60">{a.desc}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
 /* -------------------------------------------------------------------------- */
 /*  Automation (interactive AI demo)                                          */
 /* -------------------------------------------------------------------------- */

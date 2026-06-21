@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import { loadMotionLibs, prefersReducedMotion } from "@/components/pawsome/motion";
 import { microcopy } from "./data";
 import {
+  StAutomations,
   StCases,
   StContact,
   StCounters,
@@ -62,7 +63,7 @@ export function StudioExperience() {
       };
       const onOver = (e: MouseEvent) => {
         const t = e.target as HTMLElement;
-        if (t.closest("[data-case]")) setVariant("hover", "View");
+        if (t.closest("[data-case]")) setVariant("view", "View");
         else if (t.closest("a, button, [data-magnetic]")) setVariant("hover", "");
         else setVariant("", "");
       };
@@ -207,6 +208,7 @@ export function StudioExperience() {
         <StHero />
         <StMarquee />
         <StServices />
+        <StAutomations />
         <StCounters />
         <StCases onOpen={openDemo} />
         <StProcess />

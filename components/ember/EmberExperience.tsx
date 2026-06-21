@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import { loadMotionLibs, prefersReducedMotion } from "@/components/pawsome/motion";
 import { EmberCanvas } from "./EmberCanvas";
 import {
+  EmAutomations,
   EmBlaze,
   EmEmbers,
   EmGlow,
@@ -327,6 +328,7 @@ export function EmberExperience() {
         <EmBlaze />
         <EmGlow />
         <EmStats />
+        <EmAutomations />
         <EmEmbers onBack={() => navigateWithWipe("/")} />
       </main>
     </div>

@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import { loadMotionLibs, prefersReducedMotion } from "./motion";
 import {
   PwAutomation,
+  PwAutomationIdeas,
   PwCta,
   PwGallery,
   PwHero,
@@ -314,6 +315,7 @@ export function PawsomeExperience() {
         <PwServices />
         <PwGallery />
         <PwStats />
+        <PwAutomationIdeas />
         <PwAutomation />
         <PwTestimonial />
         <PwCta onBack={() => navigateWithWipe("/")} />

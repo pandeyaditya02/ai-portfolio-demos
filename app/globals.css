@@ -976,6 +976,12 @@ body {
   transition: width 0.28s ease, height 0.28s ease, margin 0.28s ease, background 0.28s ease;
 }
 .st-cursor[data-variant="hover"] {
+  /* transparent inverting ring so link/button text stays readable */
+  width: 64px;
+  height: 64px;
+  margin: -32px 0 0 -32px;
+}
+.st-cursor[data-variant="view"] {
   width: 92px;
   height: 92px;
   margin: -46px 0 0 -46px;
@@ -997,7 +1003,7 @@ body {
   opacity: 0;
   transition: opacity 0.2s ease;
 }
-.st-cursor[data-variant="hover"] .st-cursor-label { opacity: 1; }
+.st-cursor[data-variant="view"] .st-cursor-label { opacity: 1; }
 .st-cursor-dot {
   width: 6px;
   height: 6px;
@@ -1179,6 +1185,287 @@ body {
   .st-reveal { opacity: 1; transform: none; }
   .st-word,
   .st-line { transform: none; }
+}
+
+/* ============================================================
+   FLOUR & BLOOM — "The Bakehouse" (CRAV-inspired, scoped)
+   ============================================================ */
+.flourbloom {
+  --fb-bg: #1a120b;
+  --fb-crust: #4a2c14;
+  --fb-cream: #f6ead6;
+  --fb-amber: #e09b3d;
+  --fb-pink: #e3568f;
+  --fb-ink: #120b06;
+  --fb-display: "Playfair Display", Georgia, serif;
+  --fb-serif: "Cormorant Garamond", Georgia, serif;
+  --fb-sans: "Nunito", ui-sans-serif, system-ui, sans-serif;
+
+  position: relative;
+  background:
+    radial-gradient(120% 80% at 50% -10%, rgba(224, 155, 61, 0.18), transparent 55%),
+    radial-gradient(100% 80% at 50% 120%, rgba(227, 86, 143, 0.16), transparent 60%),
+    var(--fb-bg);
+  color: var(--fb-cream);
+  font-family: var(--fb-sans);
+  overflow-x: hidden;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .flourbloom,
+  .flourbloom a,
+  .flourbloom button {
+    cursor: none;
+  }
+}
+
+/* Custom cursor */
+.fb-cursor,
+.fb-cursor-dot {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 9999;
+  pointer-events: none;
+  border-radius: 9999px;
+  will-change: transform;
+}
+.fb-cursor {
+  width: 40px;
+  height: 40px;
+  margin: -20px 0 0 -20px;
+  border: 1.5px solid var(--fb-amber);
+  transition: width 0.28s ease, height 0.28s ease, margin 0.28s ease, background 0.28s ease;
+}
+.fb-cursor[data-variant="hover"] {
+  width: 80px;
+  height: 80px;
+  margin: -40px 0 0 -40px;
+  background: rgba(224, 155, 61, 0.18);
+}
+.fb-cursor-dot {
+  width: 6px;
+  height: 6px;
+  margin: -3px 0 0 -3px;
+  background: var(--fb-pink);
+  box-shadow: 0 0 12px 2px rgba(227, 86, 143, 0.7);
+}
+@media (hover: none) {
+  .fb-cursor,
+  .fb-cursor-dot {
+    display: none;
+  }
+}
+
+/* Film grain overlay (reuses pw-grain keyframes) */
+.fb-grain {
+  position: fixed;
+  inset: -50%;
+  z-index: 60;
+  pointer-events: none;
+  opacity: 0.05;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  animation: pw-grain 0.6s steps(2) infinite;
+}
+
+/* Soft glow blobs */
+.fb-blob {
+  position: absolute;
+  border-radius: 9999px;
+  filter: blur(90px);
+  opacity: 0.4;
+  pointer-events: none;
+  will-change: transform;
+}
+
+/* Glass card (warm) */
+.fb-glass {
+  background: rgba(246, 234, 214, 0.05);
+  border: 1px solid rgba(246, 234, 214, 0.12);
+  box-shadow: 0 30px 80px -40px rgba(224, 155, 61, 0.4);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+}
+
+/* Buttons */
+.fb-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  border-radius: 9999px;
+  background: linear-gradient(120deg, var(--fb-amber), var(--fb-pink));
+  color: #23130a;
+  padding: 0.95rem 1.8rem;
+  font-size: 0.92rem;
+  font-weight: 800;
+  letter-spacing: -0.01em;
+  will-change: transform;
+  box-shadow: 0 12px 40px -12px rgba(227, 86, 143, 0.55);
+  transition: filter 0.3s ease;
+}
+.fb-btn:hover { filter: brightness(1.08); }
+.fb-btn--ghost {
+  background: transparent;
+  color: var(--fb-cream);
+  border: 1px solid rgba(246, 234, 214, 0.25);
+  box-shadow: none;
+}
+.fb-btn--ghost:hover { background: rgba(246, 234, 214, 0.06); }
+
+/* Inputs */
+.fb-input {
+  width: 100%;
+  border-radius: 14px;
+  border: 1px solid rgba(246, 234, 214, 0.18);
+  background: rgba(18, 11, 6, 0.55);
+  padding: 0.72rem 0.95rem;
+  font-size: 0.9rem;
+  color: var(--fb-cream);
+  outline: none;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+.fb-input::placeholder { color: rgba(246, 234, 214, 0.4); }
+.fb-input:focus {
+  border-color: var(--fb-amber);
+  box-shadow: 0 0 0 4px rgba(224, 155, 61, 0.18);
+}
+.fb-input[type="date"] { color-scheme: dark; }
+
+/* Typography */
+.fb-display {
+  font-family: var(--fb-display);
+  font-weight: 700;
+  line-height: 0.92;
+  letter-spacing: -0.02em;
+}
+.fb-serif { font-family: var(--fb-serif); }
+.fb-h-mega { font-size: clamp(3.4rem, 14vw, 14rem); }
+.fb-h-xl { font-size: clamp(2.4rem, 7vw, 6.5rem); }
+
+/* Kinetic headline letters */
+.fb-letter {
+  display: inline-block;
+  will-change: transform, opacity;
+}
+
+/* Duplicated / echoed sub-headline (CRAV-style) */
+.fb-echo {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.2em 0.5em;
+  font-family: var(--fb-display);
+  font-weight: 700;
+  line-height: 1;
+  font-size: clamp(1.4rem, 5vw, 3.4rem);
+  letter-spacing: 0.02em;
+}
+.fb-echo__line { color: var(--fb-amber); }
+.fb-echo__line--ghost {
+  color: transparent;
+  -webkit-text-stroke: 1px rgba(246, 234, 214, 0.35);
+}
+
+/* Reveal primitives */
+.fb-reveal { opacity: 0; transform: translateY(40px) scale(0.98); }
+.is-ready .fb-reveal { opacity: 1; transform: none; }
+.fb-line-mask { overflow: hidden; display: block; }
+.fb-line { display: block; transform: translateY(115%); }
+.is-ready .fb-line { transform: none; }
+
+/* SVG path draw (fallback: solid if GSAP unavailable) */
+.fb-draw { stroke-dasharray: 1; stroke-dashoffset: 1; }
+.is-ready .fb-draw { stroke-dasharray: none; stroke-dashoffset: 0; }
+
+/* Image card */
+.fb-img-fallback {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: clamp(3rem, 8vw, 6rem);
+}
+.flourbloom .fb-img-fallback + img {
+  position: absolute;
+  inset: 0;
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+  transition: opacity 0.4s ease, transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Layer chip hover lift */
+.fb-layer {
+  background: rgba(246, 234, 214, 0.04);
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), background 0.3s ease;
+}
+.fb-layer:hover {
+  transform: translateY(-4px);
+  background: rgba(246, 234, 214, 0.07);
+}
+
+/* Marquee (reuses pw-marquee keyframes) */
+.fb-marquee {
+  display: flex;
+  width: max-content;
+  will-change: transform;
+  animation: pw-marquee 38s linear infinite;
+}
+
+/* Pinned bakes "pass" */
+.fb-pass-track {
+  display: flex;
+  height: 100%;
+  will-change: transform;
+}
+
+/* Counters */
+.fb-counter { font-variant-numeric: tabular-nums; }
+
+/* Preloader */
+.fb-preloader {
+  position: fixed;
+  inset: 0;
+  z-index: 10000;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1.4rem;
+  background: var(--fb-bg);
+  color: var(--fb-cream);
+}
+.fb-preloader__bar {
+  width: min(220px, 60vw);
+  height: 2px;
+  background: rgba(246, 234, 214, 0.14);
+  overflow: hidden;
+  border-radius: 9999px;
+}
+.fb-preloader__fill {
+  display: block;
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg, var(--fb-pink), var(--fb-amber));
+}
+
+/* Page wipe */
+.fb-wipe {
+  position: fixed;
+  inset: 0;
+  z-index: 9998;
+  background: linear-gradient(180deg, var(--fb-amber), var(--fb-crust));
+  transform: scaleY(0);
+  transform-origin: bottom;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .fb-marquee { animation: none; }
+  .fb-grain { animation: none; }
+  .fb-reveal { opacity: 1; transform: none; }
+  .fb-line { transform: none; }
 }
 
 

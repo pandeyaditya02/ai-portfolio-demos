@@ -7,6 +7,7 @@ import { AutomationShowcase } from "@/components/demo/AutomationShowcase";
 import { PawsomeExperience } from "@/components/pawsome/PawsomeExperience";
 import { BrightSmileExperience } from "@/components/brightsmile/BrightSmileExperience";
 import { EmberExperience } from "@/components/ember/EmberExperience";
+import { FlourBloomExperience } from "@/components/flourbloom/FlourBloomExperience";
 import {
   AutomationList,
   DemoBanner,
@@ -48,6 +49,11 @@ export default function DemoPage({ params }: { params: { slug: string } }) {
   // Olive & Ember ships the "Tend the Fire" experience.
   if (business.slug === "restaurant") {
     return <EmberExperience />;
+  }
+
+  // Flour & Bloom ships the bespoke "Bakehouse" experience.
+  if (business.slug === "bakery") {
+    return <FlourBloomExperience />;
   }
 
   return (

@@ -304,3 +304,45 @@ export function EmEmbers({ onBack }: { onBack: () => void }) {
 
 /* Re-export stage labels for any future progress UI. */
 export { stages };
+
+const emAutomationIdeas = [
+  {
+    icon: "\u{1F37D}\uFE0F",
+    title: "Waitlist & table-turn optimizer",
+    desc: "Predicts table availability in real time and offers freed-up tables to the waitlist automatically.",
+  },
+  {
+    icon: "\u{1F377}",
+    title: "Personalized menu & upsell",
+    desc: "Recommends dishes and wine pairings to each guest based on their past orders and the night's specials.",
+  },
+  {
+    icon: "\u{1F389}",
+    title: "Large-party inquiry handler",
+    desc: "An AI assistant captures event size, date, and budget, then returns an instant private-dining quote.",
+  },
+];
+
+export function EmAutomations() {
+  return (
+    <section className="relative px-6 py-28 sm:px-10">
+      <div className="mx-auto max-w-[1500px]">
+        <div className="mx-auto max-w-2xl text-center" data-em-reveal>
+          <p className="text-xs uppercase tracking-[0.3em] text-[var(--em-ember)]">More on the pass</p>
+          <h2 className="em-display em-h-xl mt-3 text-[var(--em-cream)]">
+            AI we can <span className="em-serif italic text-[var(--em-ember-bright)]">fire up next.</span>
+          </h2>
+        </div>
+        <div className="mt-14 grid gap-6 md:grid-cols-3">
+          {emAutomationIdeas.map((a) => (
+            <div key={a.title} data-em-reveal className="em-glass rounded-[28px] p-8">
+              <div className="text-3xl">{a.icon}</div>
+              <h3 className="em-display mt-5 text-2xl text-[var(--em-cream)] sm:text-3xl">{a.title}</h3>
+              <p className="mt-3 text-sm leading-relaxed text-[var(--em-cream)]/60">{a.desc}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}

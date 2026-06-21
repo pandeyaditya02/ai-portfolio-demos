@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { businesses } from "@/data/businesses";
 import type { Business } from "@/data/types";
-import { featuredSlugs, marqueeWords, microcopy, process, services, statement } from "./data";
+import { automationCapabilities, featuredSlugs, marqueeWords, microcopy, process, services, statement } from "./data";
 
 /* -------------------------------------------------------------------------- */
 /*  Nav                                                                       */
@@ -19,6 +19,7 @@ export function StNav() {
         <div className="hidden items-center gap-8 text-sm font-semibold text-white md:flex">
           <a href="#work" data-magnetic className="transition hover:opacity-60">Work</a>
           <a href="#services" data-magnetic className="transition hover:opacity-60">Services</a>
+          <a href="#automations" data-magnetic className="transition hover:opacity-60">Automations</a>
           <a href="#process" data-magnetic className="transition hover:opacity-60">Process</a>
         </div>
         <a
@@ -116,6 +117,36 @@ export function StServices() {
   );
 }
 
+export function StAutomations() {
+  return (
+    <section id="automations" className="border-t-2 border-[var(--st-ink)] px-6 py-24 sm:px-10 sm:py-32">
+      <div className="mx-auto max-w-[1600px]">
+        <div className="mb-12 flex flex-wrap items-end justify-between gap-4">
+          <h2 className="st-display st-h-xl text-[var(--st-ink)]">
+            AI automations<span className="text-[var(--st-yellow)]">.</span>
+          </h2>
+          <p className="max-w-sm text-[var(--st-ink)]/60">
+            Workflows that work for every kind of business, running 24/7 so you don&rsquo;t have to.
+          </p>
+        </div>
+        <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+          {automationCapabilities.map((a) => (
+            <div
+              key={a.title}
+              data-reveal
+              className="rounded-3xl border-2 border-[var(--st-ink)] p-7 transition duration-300 hover:bg-[var(--st-yellow)]"
+            >
+              <div className="text-3xl">{a.icon}</div>
+              <h3 className="st-display mt-4 text-2xl text-[var(--st-ink)]">{a.title}</h3>
+              <p className="mt-3 text-sm text-[var(--st-ink)]/70">{a.desc}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
 /* -------------------------------------------------------------------------- */
 /*  Counter band                                                              */
 /* -------------------------------------------------------------------------- */
@@ -124,7 +155,7 @@ export function StCounters() {
   const items = [
     { value: businesses.length, suffix: "", label: "Industries covered" },
     { value: businesses.length, suffix: "", label: "Live demos to explore" },
-    { value: 3, suffix: "", label: "Awwwards-grade builds" },
+    { value: featuredSlugs.length, suffix: "", label: "Awwwards-grade builds" },
   ];
   return (
     <section className="border-y-2 border-[var(--st-ink)] bg-[var(--st-yellow)] px-6 py-16 sm:px-10">
@@ -312,6 +343,7 @@ export function StFooter() {
           <div className="flex flex-wrap gap-x-6 gap-y-2 text-sm text-[var(--st-cream)]/60">
             <a href="#work" data-magnetic className="hover:text-[var(--st-cream)]">Work</a>
             <a href="#services" data-magnetic className="hover:text-[var(--st-cream)]">Services</a>
+            <a href="#automations" data-magnetic className="hover:text-[var(--st-cream)]">Automations</a>
             <a href="#process" data-magnetic className="hover:text-[var(--st-cream)]">Process</a>
             <a href="#contact" data-magnetic className="hover:text-[var(--st-cream)]">Contact</a>
           </div>
